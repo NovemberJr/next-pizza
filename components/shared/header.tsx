@@ -6,7 +6,7 @@ import { Button } from "../ui";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
 
 interface Props {
-    className?: string
+    className?: string;
 }
 
 export const Header: React.FC<Props> = ({ className }) => {

@@ -3,7 +3,7 @@ import React from "react";
 import { Categories, Container, SortPopup } from ".";
 
 interface Props {
-    className?: string
+    className?: string;
 }
 
 export const TopBar: React.FC<Props> = ({ className }) => {

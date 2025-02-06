@@ -1,22 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Title, FilterCheckbox, RangeSlider, CheckboxFiltersGroup } from ".";
 import { Input } from "../ui";
 import { FilterCheckboxProps } from "./filter-checkbox";
+import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 
 interface Props {
     className?: string;
 }
 
-const defaultIngredients: FilterCheckboxProps[] = [
-    { text: "Сырный соус", value: "1"},
-    { text: "Моцарелла", value: "2"},
-    { text: "Чеснок", value: "3"},
-    { text: "Солёные огурчики", value: "4"},
-    { text: "Красный лук", value: "5"},
-    { text: "Томаты", value: "6"},
-];
-
 export const Filters: React.FC<Props> = ({ className }) => {
+    const { ingredients, loading } = useFilterIngredients();
+    const defaultIngredients = ingredients.map(item => ({ text: item.name, value: item.id.toString() })).slice(0,6);
+    
     return <div className={className}>
         <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
 
@@ -41,6 +38,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
             limit={6}
             defaultItems={defaultIngredients}
             items={[...defaultIngredients, ...defaultIngredients]}
+            loading={loading}
         />
     </div>;
 };

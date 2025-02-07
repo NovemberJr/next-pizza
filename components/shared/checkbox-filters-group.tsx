@@ -5,23 +5,26 @@ import { FilterCheckbox, FilterCheckboxProps } from "./filter-checkbox";
 import { Input, Skeleton } from "../ui";
 import { ItemText } from "@radix-ui/react-select";
 
-type Item = FilterCheckboxProps;
+type Item = Omit<FilterCheckboxProps, "name">;
 
 interface Props {
     title: string;
+    name: string;
     items: Item[];
     defaultItems: Item[];
     limit?: number;
     loading?: boolean;
     searchInputPlaceholder?: string;
-    onChange?: (values: string[]) => void;
+    selectedIds?: Set<string>;
+    onClickCheckbox?: (id: string) => void;
     defaultValue?: string[];
     className?: string;
 }
 
-export const CheckboxFiltersGroup: React.FC<Props> = ({ title, items, defaultItems, limit = 5, loading, searchInputPlaceholder = "Поиск...", className, onChange, defaultValue }) => {
+export const CheckboxFiltersGroup: React.FC<Props> = ({ title, name, items, defaultItems, limit = 5, loading, searchInputPlaceholder = "Поиск...", className, selectedIds, onClickCheckbox, defaultValue }) => {
     const [showAll, setShowAll] = useState(false);
     const [searchValue, setSearchValue] = useState("");
+
 
     const list = showAll
         ? items.filter((item) => item.text.toLowerCase().includes(searchValue.toLocaleLowerCase()))
@@ -60,8 +63,9 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({ title, items, defaultIte
                 key={i}
                 text={item.text}
                 value={item.value}
-                checked={false}
-                onCheckedChange={(ids) => console.log(ids)}
+                name={name}
+                checked={selectedIds?.has(item.value)}
+                onCheckedChange={() => onClickCheckbox?.(item.value)}
                 endAdornment={item.endAdornment}
             />)}
         </div>

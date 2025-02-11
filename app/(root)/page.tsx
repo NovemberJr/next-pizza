@@ -12,7 +12,7 @@ export default async function Home() {
 		}
 	});
 
-	return (<>
+	return <>
 		<Container className="mt-10">
 			<Title text="Все пиццы" size="lg" className="font-extrabold" />
 		</Container>
@@ -40,5 +40,5 @@ export default async function Home() {
 				</div>
 			</div>
 		</Container>
-	</>);
-}
+	</>;
+};

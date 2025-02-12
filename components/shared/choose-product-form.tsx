@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import { IngredientItem, Title } from ".";
+import { Title } from ".";
 import { Button } from "../ui/button";
-import { useSet } from "react-use";
 
 interface Props {
     name: string;
@@ -14,8 +13,6 @@ interface Props {
 export const ChooseProductForm: React.FC<Props> = ({ name, imageUrl, onClickAdd, className }) => {
     const textDetails = "30см тесто тонкое 590г";
     const price = 350;
-
-    const [selectedIngredients, { toggle: toggleIngredient }] = useSet(new Set<number>([]));
 
     return <div className={cn("flex flex-1", className)}>
         <div className="flex items-center justify-center flex-1 relative w-full">

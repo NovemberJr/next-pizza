@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { ChoosePizzaForm, ChooseProductForm } from "../";
 import { ProductWithRelations } from "@/@types/prisma";
@@ -23,8 +23,9 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
 
     return <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
         <DialogContent className={cn("p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden", className)}>
+            <DialogTitle className="hidden"></DialogTitle>
             {isPizza ? (
-                <ChoosePizzaForm name={product.name} imageUrl={product.imageUrl} ingredients={product.ingredients} />
+                <ChoosePizzaForm name={product.name} imageUrl={product.imageUrl} items={product.items} ingredients={product.ingredients} />
             ) : (
                 <ChooseProductForm name={product.name} imageUrl={product.imageUrl} />
             )}
